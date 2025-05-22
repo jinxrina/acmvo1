@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACMV Calculations Singapore</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>ACMV Load & Size Estimator</h1>
+            <p style="font-size: 0.9em; opacity: 0.8;">For Singapore Context (Simplified)</p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="openTab(event, 'coolingLoadCalc')">Cooling Load & Aircon Sizing</button>
+        </div>
+
+        <div id="coolingLoadCalc" class="tab-content active">
+            <h2>Cooling Load & Aircon Size Calculation</h2>
+            <p>This tool provides an estimate based on simplified inputs. For precise calculations, consult an ACMV professional and refer to Singapore's SS 553 / SS 554 standards.</p>
+
+            <div class="form-group">
+                <label for="buildingType">Type of Building:</label>
+                <select id="buildingType">
+                    <option value="residential_apartment">Residential - Apartment/Condo</option>
+                    <option value="residential_landed">Residential - Landed Property</option>
+                    <option value="office_small">Small Office</option>
+                    <option value="office_large">Large Office</option>
+                    <option value="retail_shop">Retail Shop</option>
+                    <option value="classroom">Classroom/Lecture Hall</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="roomArea">Room Area (square meters):</label>
+                <input type="number" id="roomArea" value="20" min="5" step="1">
+            </div>
+
+            <div class="form-group">
+                <label for="ceilingHeight">Average Ceiling Height (meters):</label>
+                <input type="number" id="ceilingHeight" value="2.8" min="2.0" max="5.0" step="0.1">
+            </div>
+
+            <div class="form-group">
+                <label for="numOccupants">Number of Occupants (typical):</label>
+                <input type="number" id="numOccupants" value="2" min="1" step="1">
+            </div>
+
+            <div class="form-group">
+                <label for="windowArea">Total Window Area (square meters):</label>
+                <input type="number" id="windowArea" value="4" min="0" step="0.5">
+            </div>
+
+            <div class="form-group">
+                <label for="windowFacing">Primary Window Facing:</label>
+                <select id="windowFacing">
+                    <option value="north">North (Mostly Shaded)</option>
+                    <option value="south">South (Some Sun)</option>
+                    <option value="east">East (Morning Sun)</option>
+                    <option value="west">West (Afternoon Sun - Highest Load)</option>
+                    <option value="shaded">Well Shaded / No Direct Sun</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="equipmentLoad">Heat Emitting Equipment (Watts):</label>
+                <input type="number" id="equipmentLoad" value="300" min="0" step="50" placeholder="e.g., PCs, TVs, kitchen appliances">
+                 <small>Approx: PC (150-250W), TV (50-150W), Lights (5-15W/m²)</small>
+            </div>
+
+            <div class="form-group">
+                <label for="insulationQuality">Building Insulation & Shading:</label>
+                <select id="insulationQuality">
+                    <option value="good">Good (Modern, well-insulated, good external shading)</option>
+                    <option value="average">Average (Typical construction)</option>
+                    <option value="poor">Poor (Older building, single-pane windows, minimal shading)</option>
+                </select>
+            </div>
+
+            <button class="calc-button" onclick="calculateCoolingLoad()">Calculate Cooling Load</button>
+
+            <div id="results" class="results-section">
+                <h3>Estimated Results:</h3>
+                <p>Total Estimated Cooling Load: <strong id="totalLoadBtu">0 BTU/hr</strong> (<strong id="totalLoadKw">0 kW</strong>)</p>
+                <p>This is a preliminary estimate. Factors like specific material properties, air infiltration rates, and detailed ventilation requirements according to SS 553/SS 554 are not fully modelled.</p>
+
+                <div class="recommendation-box">
+                    <h4>Air Conditioner Type & Sizing Suggestion:</h4>
+                    <p id="acTypeSuggestion">Select inputs and calculate.</p>
+                    <p>Recommended AC Capacity: <strong id="acSizeSuggestion">0 BTU/hr (0 System)</strong></p>
+                </div>
+
+                <div class="recommendation-box">
+                    <h4>General Brand Recommendations (Illustrative):</h4>
+                    <p id="brandRecommendation">Based on typical market availability and suitability.</p>
+                    <ul id="brandList">
+                        <li>Consider brands known for energy efficiency (e.g., 5-tick models in Singapore).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="disclaimer">
+            <p><strong>Disclaimer:</strong> This calculator provides simplified estimates for informational purposes only. It is not a substitute for professional engineering advice or detailed calculations as per Singapore's Code of Practice SS 553/SS 554. Always consult a qualified ACMV engineer for accurate design and specification.</p>
+        </div>
+        <div class="developer-credit">
+            <p>Designed by Kyaw Myo Naing</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
